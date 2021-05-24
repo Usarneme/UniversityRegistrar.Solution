@@ -8,43 +8,39 @@ using University.Models;
 
 namespace University
 {
-  public class Startup
-  {
-    public Startup(IWebHostEnvironment env)
+    public class Startup
     {
-      var builder = new ConfigurationBuilder()
-        .SetBasePath(env.ContentRootPath)
-        .AddJsonFile("appsettings.json");
-      Configuration = builder.Build();
+        public Startup(IWebHostEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(env.ContentRootPath)
+            .AddJsonFile("appsettings.json");
+            Configuration = builder.Build();
+        }
+
+        public IConfigurationRoot Configuration { get; set; }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc();
+            services.AddEntityFrameworkMySql()
+                .AddDbContext<UniversityContext>(options => options
+                .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
+        }
+
+        public void Configure(IApplicationBuilder app)
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseRouting();
+            app.UseStaticFiles();
+            app.UseEndpoints(routes =>
+            {
+                routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
+                app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hola, Mundo");
+            });
+        }
     }
-
-    public IConfigurationRoot Configuration { get; set; }
-
-    public void ConfigureServices(IServiceCollection services)
-    {
-      services.AddMvc();
-
-      services.AddEntityFrameworkMySql()
-        .AddDbContext<UniversityContext>(options => options
-        .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
-    }
-
-    public void Configure(IApplicationBuilder app)
-    {
-      app.UseDeveloperExceptionPage();
-      app.UseRouting();
-
-      app.UseEndpoints(routes =>
-      {
-        routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-      });
-
-      app.UseStaticFiles();
-      
-      app.Run(async (context) =>
-      {
-        await context.Response.WriteAsync("Hola, Mundo");
-      });
-    }
-  }
 }
