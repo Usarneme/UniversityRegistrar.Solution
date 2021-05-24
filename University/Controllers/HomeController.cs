@@ -11,16 +11,21 @@ namespace University.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly UniversityContext _db;
+        public HomeController(UniversityContext db)
         {
-            _logger = logger;
+            _db = db;
         }
 
+        [HttpGet("/")]
         public IActionResult Index()
         {
-            return View();
+            IQueryable<Course> courses = _db.Courses;
+            IQueryable<Student> students = _db.Students;
+            Dictionary<string, int> model = new Dictionary<string, int>() {};
+            model.Add("courses", courses.Count());
+            model.Add("students", students.Count());
+            return View(model);
         }
 
     }
