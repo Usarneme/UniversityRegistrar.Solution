@@ -16,9 +16,9 @@
       </div>
       <div class="form-group">
         @Html.Label("Are you vaccinated?")
-        @Html.RadioButtonFor(model => model.VaccinationStatus, "Yes", new { @id="vaccine_yes" })
+        @Html.RadioButtonFor(model => model.VaccinationStatus, "True", new { @id="vaccine_yes" })
         @Html.LabelFor(model => model.VaccinationStatus, "Yes")
-        @Html.RadioButtonFor(model => model.VaccinationStatus, "No", new { @id="vaccine_no" })
+        @Html.RadioButtonFor(model => model.VaccinationStatus, "False", new { @id="vaccine_no" })
         @Html.LabelFor(model => model.VaccinationStatus, "No")
       </div>
       <div class="form-group">

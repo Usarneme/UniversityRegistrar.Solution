@@ -1,0 +1,20 @@
+@model University.Models.Course
+
+<div class="container">
+  <h2>Edit</h2>
+
+  <h4>Edit Course "@Html.DisplayFor(model => model.CourseName)"</h4>
+
+  @using (Html.BeginForm("edit", "student", new { @id = @Model.CourseId }, FormMethod.Post))
+  {
+    @Html.HiddenFor(model => model.CourseId)
+
+    @Html.LabelFor(model => model.CourseName)
+    @Html.EditorFor(model => model.CourseName)
+
+    @Html.LabelFor(model => model.CourseDescription)
+    @Html.EditorFor(model => model.CourseDescription)
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+  }
+</div>

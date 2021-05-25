@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System;
 using System.Linq;
 using University.Models;
 
@@ -28,6 +32,47 @@ namespace University.Controllers
     public ActionResult Create(Course course)
     {
       _db.Courses.Add(course);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [HttpGet("/courses/details/{id}")]
+    public ActionResult Details(int id)
+    {
+      var thisCourse = _db.Courses
+        .Include(course => course.JoinEntities)
+        .ThenInclude(join => join.Course)
+        .FirstOrDefault(course => course.CourseId == id);
+      return View(thisCourse);
+    }
+
+    [HttpGet("/courses/edit/{id}")]
+    public ActionResult Edit(int id)
+    {
+      var thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
+      return View(thisCourse);
+    }
+
+    [HttpPost("/courses/edit/{id}"), ActionName("Edit")]
+    public ActionResult Edit(Course course)
+    {
+      _db.Entry(course).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [HttpGet("/courses/delete/{id}")]
+    public ActionResult Delete(int id)
+    {
+      var thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
+      return View(thisCourse);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var thisCourse = _db.Courses.First(course => course.CourseId ==id);
+      _db.Courses.Remove(thisCourse);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

@@ -1,0 +1,28 @@
+@model University.Models.Course
+
+<div class="container"></div>
+  <h2> Course Details: @Html.DisplayFor(model => model.CourseName) </h2>
+  <h3>@Html.DisplayNameFor(model => model.CourseDescription): @Html.DisplayFor(model => model.CourseDescription)
+
+
+  @if(@Model.JoinEntities.Count == 0)
+  {
+    <p> No students have signed up for this course</p>
+  }
+
+  <h3>Students:</h3>
+
+  <ul>
+    @foreach(var join in Model.JoinEntities)
+    {
+      <li>@join.Student.Name</li>
+      @using (Html.BeginForm("DeleteStudents", "Courses"))
+      {
+        @Html.Hidden("joinId", @join.CourseStudentId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+  </ul>
+  @Html.ActionLink("Remove Course", "Delete", "Courses", new { id = Model.CourseId }, new { @class = "btn btn-primary" })
+  @Html.ActionLink("Edit Course", "Edit", "Courses", new { id = Model.CourseId }, new { @class = "btn btn-primary" })
+</div>

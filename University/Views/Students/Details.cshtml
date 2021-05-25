@@ -1,25 +1,30 @@
 @model University.Models.Student;
 
-<h2>Student Details</h2>
-<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+<div class="container">
+  <h2>Student Details</h2>
+  <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+  <h3>@Html.DisplayNameFor(model => model.EnrollmentDate): @Html.DisplayFor(model => model.EnrollmentDate)</h3>
+  <h3>@Html.DisplayNameFor(model => model.Gender): @Html.DisplayFor(model => model.Gender)</h3>
+  <h3>@Html.DisplayNameFor(model => model.VaccinationStatus): @Html.DisplayFor(model => model.VaccinationStatus)</h3>
 
-@if(@Model.JoinEntities.Count == 0)
-{
-  <p>This student is not enrolled in any courses</p>
-}
-
-<h3>Registered Courses</h3>
-
-<ul>
-  @foreach(var join in Model.JoinEntities)
+  @if(@Model.JoinEntities.Count == 0)
   {
-    <li>@join.Course.CourseName</li>
-    @using (Html.BeginForm("DeleteCourse", "Students"))
-    {
-      @Html.Hidden("joinId", @join.CourseStudentId)
-      <input type="submit" value="Delete"/>
-    }
+    <p>This student is not enrolled in any courses</p>
   }
-</ul>
-  @Html.ActionLink("Remove Student", "Delete", "Students", new { id = Model.StudentId }, new { @class = "btn btn-primary" })
-  @Html.ActionLink("Edit Student", "Edit", "Students", new { id = Model.StudentId }, new { @class = "btn btn-primary" })
+
+  <h3>Registered Courses</h3>
+
+  <ul>
+    @foreach(var join in Model.JoinEntities)
+    {
+      <li>@join.Course.CourseName</li>
+      @using (Html.BeginForm("DeleteCourse", "Students"))
+      {
+        @Html.Hidden("joinId", @join.CourseStudentId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+  </ul>
+    @Html.ActionLink("Remove Student", "Delete", "Students", new { id = Model.StudentId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit Student", "Edit", "Students", new { id = Model.StudentId }, new { @class = "btn btn-primary" })
+</div>
