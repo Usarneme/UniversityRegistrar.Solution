@@ -78,17 +78,29 @@ body {
 }
 
 nav,
-header {
-  background: unset;
-  opacity: 0.25;
-  color: gold;
+.navbar,
+.navbar-expand-sm,
+.navbar-toggleable-sm,
+.navbar-light,
+.bg-white {
+  background: rgba(0, 0, 128, 0.85);
+  color: gold !important;
 }
 
+.navbar-light,
+.navbar-brand,
+.navbar-light .navbar-nav .nav-link,
+.navbar-light,
+.navbar-nav,
+.nav-link,
 nav,
 ul,
 li,
-a.nav-link {
-  color: gold;
+a.nav-link,
+li.nav-item,
+.navbar-nav,
+.navbar-nav.flex-grow-1 {
+  color: gold !important;
 }
 
 .footer {

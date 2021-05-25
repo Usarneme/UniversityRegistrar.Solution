@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace University.Models
 {
@@ -10,7 +11,9 @@ namespace University.Models
     }
 
     public int CourseId { get; set; }
+    [Required]
     public string CourseName { get; set; }
+    [Required]
     public string CourseDescription { get; set; }
     public virtual ICollection<CourseStudent> JoinEntities { get; set; }
   }
