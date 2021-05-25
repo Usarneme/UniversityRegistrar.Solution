@@ -1,13 +1,13 @@
-@model University.Models.Student
+@model University.Models.Professor
 
 <div class="container">
   <h2>Edit</h2>
 
-  <h4>Edit this Student: @Html.DisplayFor(model => model.Name)</h4>
+  <h4>Edit this Professor: @Html.DisplayFor(model => model.Name)</h4>
 
-  @using (Html.BeginForm("edit", "student", new { @id = @Model.StudentId }, FormMethod.Post))
+  @using (Html.BeginForm("edit", "professors", new { @id = @Model.ProfessorId }, FormMethod.Post))
   {
-    @Html.HiddenFor(model => model.StudentId)
+    @Html.HiddenFor(model => model.ProfessorId)
 
     @Html.LabelFor(model => model.Name)
     @Html.EditorFor(model => model.Name)

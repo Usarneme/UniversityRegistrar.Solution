@@ -1,0 +1,28 @@
+@model University.Models.Professor;
+
+<div class="container">
+  <h3> Add Professor </h3>
+
+  <div class="form-container d-flex flex-column">
+    @using (Html.BeginForm())
+    {
+      <div class="form-group">
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, "text", new { @required = "required" })
+      </div>
+      <div class="form-group">
+        @Html.LabelFor(model => model.Gender)
+        @Html.TextBoxFor(model => model.Gender, "text", new { @required = "required" })
+      </div>
+      <div class="form-group">
+        @Html.Label("Are you vaccinated?")
+        @Html.RadioButtonFor(model => model.VaccinationStatus, "True", new { @id="vaccine_yes" })
+        @Html.LabelFor(model => model.VaccinationStatus, "Yes")
+        @Html.RadioButtonFor(model => model.VaccinationStatus, "False", new { @id="vaccine_no" })
+        @Html.LabelFor(model => model.VaccinationStatus, "No")
+      </div>
+
+      <input type="submit" value="Add Professor" class="btn btn-block btn-primary">
+    }
+  </div>
+</div>

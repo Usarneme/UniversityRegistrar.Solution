@@ -2,16 +2,17 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4 text-uppercase p-4">College</h1>
-    <h2>Registrar - Administration</h2>
-    <div class="container">
-        <p>Please select from the following options:</p>
-        @Html.ActionLink("View Students", "Index", "Students", null, new { @class = "btn btn-block btn-primary" })
-        @Html.ActionLink("View Courses", "Index", "Courses", null, new { @class = "btn btn-block btn-primary" })
-    </div>
-    <div class="container counts">
-        <h3>Total Students: @Model["students"]</h3>
-        <h3>Total Courses: @Model["courses"]</h3>
-    </div>
+<div class="container text-center">
+  <h1 class="display-4 text-uppercase p-4">College</h1>
+  <h2>Registrar - Administration</h2>
+  <div class="container">
+    <p>Please select from the following options:</p>
+    @Html.ActionLink("View Students", "Index", "Students", null, new { @class = "btn btn-block btn-primary" })
+    @Html.ActionLink("View Courses", "Index", "Courses", null, new { @class = "btn btn-block btn-primary" })
+    @Html.ActionLink("View Professors", "Index", "Professors", null, new { @class = "btn btn-block btn-primary" })
+  </div>
+  <div class="container counts pt-5">
+    <h3>Total Students: @Model["students"]</h3>
+    <h3>Total Courses: @Model["courses"]</h3>
+  </div>
 </div>

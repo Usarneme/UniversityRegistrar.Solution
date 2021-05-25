@@ -16,9 +16,7 @@ namespace University.Models
         .Build();
 
         var builder = new DbContextOptionsBuilder<UniversityContext>();
-
         builder.UseMySql(configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(configuration["connectionStrings:DefaultConnection"]));
-
         return new UniversityContext(builder.Options);
     }
   }

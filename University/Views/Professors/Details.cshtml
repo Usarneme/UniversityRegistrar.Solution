@@ -1,0 +1,29 @@
+@model University.Models.Professor;
+
+<div class="container">
+  <h2>Professor Details</h2>
+  <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+  <h3>@Html.DisplayNameFor(model => model.Gender): @Html.DisplayFor(model => model.Gender)</h3>
+  <h3>@Html.DisplayNameFor(model => model.VaccinationStatus): @Html.DisplayFor(model => model.VaccinationStatus)</h3>
+
+  @if(@Model.JoinEntities.Count == 0)
+  {
+    <p>This professor is not enrolled in any courses</p>
+  }
+
+  <h3>Registered Courses</h3>
+
+  <ul>
+    @foreach(var join in Model.JoinEntities)
+    {
+      <li>@join.Course.CourseName</li>
+      @using (Html.BeginForm("DeleteCourse", "Professors"))
+      {
+        @Html.Hidden("joinId", @join.CourseProfessorId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+  </ul>
+    @Html.ActionLink("Remove Professor", "Delete", "Professors", new { id = Model.ProfessorId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit Professor", "Edit", "Professors", new { id = Model.ProfessorId }, new { @class = "btn btn-primary" })
+</div>

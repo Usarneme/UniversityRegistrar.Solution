@@ -1,13 +1,13 @@
-@model University.Models.Student
+@model University.Models.Professor
 
 <div class="container">
-  <h2>Are you sure you would like to delete this student?</h2>
+  <h2>Are you sure you would like to delete this Professor?</h2>
 
   @Html.DisplayNameFor(model => model.Name) : @Html.DisplayFor(model => model.Name)
 
   @using (Html.BeginForm())
   {
-    @Html.Hidden("id", @Model.StudentId)
+    @Html.Hidden("id", @Model.ProfessorId)
     <input type="submit" value="Delete" class="btn btn-primary" />
   }
 </div>
