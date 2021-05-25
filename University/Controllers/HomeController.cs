@@ -22,9 +22,11 @@ namespace University.Controllers
         {
             IQueryable<Course> courses = _db.Courses;
             IQueryable<Student> students = _db.Students;
+            IQueryable<Professor> professors = _db.Professors;
             Dictionary<string, int> model = new Dictionary<string, int>() {};
             model.Add("courses", courses.Count());
             model.Add("students", students.Count());
+            model.Add("professors", professors.Count());
             return View(model);
         }
 
