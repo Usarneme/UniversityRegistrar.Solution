@@ -18,11 +18,14 @@
     @foreach(var join in Model.JoinEntities)
     {
       <li>@join.Course.CourseName</li>
-      @using (Html.BeginForm("DeleteCourse", "Students"))
-      {
-        @Html.Hidden("joinId", @join.CourseStudentId)
+      @* @using (Html.BeginForm(null, "DeleteCourse", "Students", null, new { @id = "deleteCourse" }))
+      { *@
+      <form id="deleteCourse">
+        @Html.Hidden("courseId", @join.CourseId)
+        @Html.Hidden("studentId", @join.StudentId)
         <input type="submit" value="Delete"/>
-      }
+      </form>
+      @* } *@
     }
   </ul>
     @Html.ActionLink("Remove Student", "Delete", "Students", new { id = Model.StudentId }, new { @class = "btn btn-primary" })

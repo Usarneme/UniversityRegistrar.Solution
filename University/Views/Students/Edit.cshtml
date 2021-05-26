@@ -8,9 +8,17 @@
   @using (Html.BeginForm("edit", "student", new { @id = @Model.StudentId }, FormMethod.Post))
   {
     @Html.HiddenFor(model => model.StudentId)
+    @Html.HiddenFor(model => model.EnrollmentDate)
 
-    @Html.LabelFor(model => model.Name)
-    @Html.EditorFor(model => model.Name)
+    <div class="form-group">
+      @Html.LabelFor(model => model.Name)
+      @Html.EditorFor(model => model.Name)
+    </div>
+
+    <div class="form-group">
+      @Html.LabelFor(model => model.Gender)
+      @Html.TextBoxFor(model => model.Gender, "text", new { @required = "required" })
+    </div>
 
     <div class="form-group">
       @Html.Label("Are you vaccinated?")
@@ -20,8 +28,10 @@
       @Html.LabelFor(model => model.VaccinationStatus, "No")
     </div>
 
-    @Html.Label("Courses")
-    @Html.DropDownList("CourseId")
+    <div class="form-group">
+      @Html.Label("Courses")
+      @Html.DropDownList("CourseId")
+    </div>
 
     <input type="submit" value="Save" class="btn btn-primary" />
   }

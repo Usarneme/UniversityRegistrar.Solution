@@ -5,7 +5,7 @@
 
   <h4>Editing Course "@Html.DisplayFor(model => model.CourseName)"</h4>
 
-  @using (Html.BeginForm("edit", "professor", new { @id = @Model.CourseId }, FormMethod.Post))
+  @using (Html.BeginForm("edit", "courses", new { @id = @Model.CourseId }, FormMethod.Post))
   {
     @Html.HiddenFor(model => model.CourseId)
 
