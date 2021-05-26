@@ -1,31 +1,38 @@
 @model University.Models.Student;
 
 <div class="container">
-  <h2>Student Details</h2>
+  <h2 class="mb-3 border-bottom">Student Details</h2>
   <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
   <h3>@Html.DisplayNameFor(model => model.EnrollmentDate): @Model.EnrollmentDate.ToShortDateString()<h3>
   <h3>@Html.DisplayNameFor(model => model.Gender): @Html.DisplayFor(model => model.Gender)</h3>
   <h3>@Html.DisplayNameFor(model => model.VaccinationStatus): @Html.DisplayFor(model => model.VaccinationStatus)</h3>
 
+  @Html.ActionLink("Remove Student", "Delete", "Students", new { id = Model.StudentId }, new { @class = "btn btn-warning" })
+  @Html.ActionLink("Edit Student", "Edit", "Students", new { id = Model.StudentId }, new { @class = "btn btn-primary" })
+
   @if(@Model.JoinEntities.Count == 0)
   {
     <p>This student is not enrolled in any courses</p>
   }
+  else
+  {
+    <hr />
+    <h3 class="pt-3 pb-1">Registered Courses</h3>
+    <ul class="pb-3">
+      @foreach(var join in Model.JoinEntities)
+      {
+        <li class="border m-2 row justify-content-start align-items-center">
+          <div class="col-sm-2 pl-0">
+            <form id="delete_@join.CourseId" class="deleteForm">
+              @Html.Hidden("courseId", @join.CourseId)
+              @Html.Hidden("studentId", @join.StudentId)
+              <input type="submit" value="Delete" class="btn btn-danger" />
+            </form>
+          </div>
+          <div class="col-sm-10">@join.Course.CourseName</div>
+        </li>
+      }
+    </ul>
+  }
 
-  <h3>Registered Courses</h3>
-
-  <ul>
-    @foreach(var join in Model.JoinEntities)
-    {
-      <li>@join.Course.CourseName
-        <form id="delete_@join.CourseId" class="deleteForm">
-          @Html.Hidden("courseId", @join.CourseId)
-          @Html.Hidden("studentId", @join.StudentId)
-          <input type="submit" value="Delete" class="btn btn-danger" />
-        </form>
-      </li>
-    }
-  </ul>
-    @Html.ActionLink("Remove Student", "Delete", "Students", new { id = Model.StudentId }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Edit Student", "Edit", "Students", new { id = Model.StudentId }, new { @class = "btn btn-primary" })
 </div>

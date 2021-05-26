@@ -76,5 +76,15 @@ namespace University.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    ////API
+    [HttpPost("/courses/remove_student/{courseStudentId}")]
+    public ActionResult DeleteStudentFromCourse(int courseStudentId)
+    {
+      var thisCourseStudent = _db.CourseStudents.FirstOrDefault(cs => cs.CourseStudentId == courseStudentId);
+      _db.CourseStudents.Remove(thisCourseStudent);
+      _db.SaveChanges();
+      return Content("ok", "application/json");
+    }
   }
 }

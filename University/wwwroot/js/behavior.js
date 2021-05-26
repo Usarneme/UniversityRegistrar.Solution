@@ -12,13 +12,9 @@ $(".deleteForm").on("submit", function(event) {
   const url = `/students/${studentId}/delete_course/${courseId}`;
   fetch(url, { method: 'POST' })
     .then(data => {
-      console.log(data)
-      console.log(data.status)
       if (data.status === 200) {
-        // update UI
         // remove the form from the dom
         $(`#${this.id}`).parent().remove();
-        // popup success
         alert(`Course removed from student.`);
       } else {
         alert("Delete failed. Please try again");
@@ -26,3 +22,17 @@ $(".deleteForm").on("submit", function(event) {
     })
 })
 
+$(".deleteStudent").on("submit", function(event) {
+  event.preventDefault();
+  const courseStudentId = this[0].value;
+  let url = `/courses/remove_student/${courseStudentId}`
+  fetch(url, { method: 'POST' })
+    .then(data => {
+      if(data.status == 200) {
+        $(`#${this.id}`).parent().parent().remove();
+        alert(`Student removed from course`)
+      } else {
+        alert(`Student removal failed`)
+      }
+    })
+})

@@ -1,8 +1,6 @@
 PROBLEMS TO ADDRESS
 
-Can add the same course multiple times
 
-Cannot edit student without adding a course
 
 Course => Delete Student route => Courses/DeleteStudents
 
