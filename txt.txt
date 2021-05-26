@@ -1,0 +1,19 @@
+PROBLEMS TO ADDRESS
+
+Can add the same course multiple times
+
+Cannot edit student without adding a course
+
+Course => Delete Student route => Courses/DeleteStudents
+
+Student => Delete course => Nothing
+
+EnrollmentDate format
+
+Professor details: "This professor is not enrolled in any courses"
+
+OPTIONS
+
+Have an add course button that will go to a new page with list of all the courses, maybe checkboxes
+
+Add a link to a view all the students a Professor has in their classes

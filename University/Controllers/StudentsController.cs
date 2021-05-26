@@ -68,8 +68,6 @@ namespace University.Controllers{
       {
         _db.CourseStudents.Add(new CourseStudent() { CourseId = CourseId, StudentId = student.StudentId});
       }
-      Console.WriteLine("HIT EDIT ROUTE");
-      Console.WriteLine(student);
       _db.Entry(student).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -95,7 +93,11 @@ namespace University.Controllers{
     [HttpPost("students/{studentId}/delete_course/{courseId}")]
     public ActionResult DeleteCourseFromStudent(int studentId, int courseId)
     {
-      Console.WriteLine("HIT THE API ROUTE, {0}, {1}", studentId, courseId);
+      // delete the course attached to the student
+      var thisCourseStudent = _db.CourseStudents.FirstOrDefault(cs => cs.StudentId == studentId && cs.CourseId == courseId);
+      _db.CourseStudents.Remove(thisCourseStudent);
+      _db.SaveChanges();
+      // return a json ok if it worked
       return Content( "ok", "application/json" );
     }
   }

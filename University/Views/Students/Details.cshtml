@@ -3,7 +3,7 @@
 <div class="container">
   <h2>Student Details</h2>
   <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
-  <h3>@Html.DisplayNameFor(model => model.EnrollmentDate): @Html.DisplayFor(model => model.EnrollmentDate)</h3>
+  <h3>@Html.DisplayNameFor(model => model.EnrollmentDate): @Model.EnrollmentDate.ToShortDateString()<h3>
   <h3>@Html.DisplayNameFor(model => model.Gender): @Html.DisplayFor(model => model.Gender)</h3>
   <h3>@Html.DisplayNameFor(model => model.VaccinationStatus): @Html.DisplayFor(model => model.VaccinationStatus)</h3>
 
@@ -17,15 +17,13 @@
   <ul>
     @foreach(var join in Model.JoinEntities)
     {
-      <li>@join.Course.CourseName</li>
-      @* @using (Html.BeginForm(null, "DeleteCourse", "Students", null, new { @id = "deleteCourse" }))
-      { *@
-      <form id="deleteCourse">
-        @Html.Hidden("courseId", @join.CourseId)
-        @Html.Hidden("studentId", @join.StudentId)
-        <input type="submit" value="Delete"/>
-      </form>
-      @* } *@
+      <li>@join.Course.CourseName
+        <form id="delete_@join.CourseId" class="deleteForm">
+          @Html.Hidden("courseId", @join.CourseId)
+          @Html.Hidden("studentId", @join.StudentId)
+          <input type="submit" value="Delete" class="btn btn-danger" />
+        </form>
+      </li>
     }
   </ul>
     @Html.ActionLink("Remove Student", "Delete", "Students", new { id = Model.StudentId }, new { @class = "btn btn-primary" })
