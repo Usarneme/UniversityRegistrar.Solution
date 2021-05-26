@@ -64,7 +64,8 @@ namespace University.Controllers{
     [HttpPost("/student/edit/{id}"), ActionName("Edit")]
     public ActionResult Edit(Student student, int CourseId)
     {
-      if (CourseId != 0)
+      var thisCourseStudent = _db.CourseStudents.FirstOrDefault(courseStudent => courseStudent.StudentId == student.StudentId && courseStudent.CourseId == CourseId);
+      if (CourseId != 0 && thisCourseStudent == null)
       {
         _db.CourseStudents.Add(new CourseStudent() { CourseId = CourseId, StudentId = student.StudentId});
       }
